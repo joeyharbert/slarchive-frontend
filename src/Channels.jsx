@@ -1,4 +1,7 @@
 export function Channels(props) {
+  const onClick = (channel) => {
+    props.setCurrentChannel(channel.name);
+  };
   return (
     <div className="col-12 col-lg-5 col-xl-3 border-right">
       <div className="px-4 d-none d-md-block">
@@ -11,7 +14,7 @@ export function Channels(props) {
       <div className="d-grid gap-1">
         {props.channels.map((channel) => (
           <div key={channel.id} className="p-2 mx-auto">
-            <a href="#" className="list-group-item list-group-item-action border-0">
+            <a onClick={() => onClick(channel)} className="list-group-item list-group-item-action border-0">
               <div className="d-flex">
                 <div className="flex-grow-1 ml-3">#{channel.name}</div>
               </div>
