@@ -8,14 +8,17 @@ export function Channels(props) {
           </div>
         </div>
       </div>
-
-      {props.channels.map((channel) => (
-        <a href="#" className="list-group-item list-group-item-action border-0" key={channel.id}>
-          <div className="d-flex align-items-start">
-            <div className="flex-grow-1 ml-3">#{channel.name}</div>
+      <div className="d-grid gap-1">
+        {props.channels.map((channel) => (
+          <div key={channel.id} className="p-2 mx-auto">
+            <a href="#" className="list-group-item list-group-item-action border-0">
+              <div className="d-flex">
+                <div className="flex-grow-1 ml-3">#{channel.name}</div>
+              </div>
+            </a>
           </div>
-        </a>
-      ))}
+        ))}
+      </div>
       <hr className="d-block d-lg-none mt-1 mb-0" />
     </div>
   );

@@ -1,38 +1,43 @@
 import ReactMarkdown from "react-markdown";
 
 export function Messages(props) {
-  const channel = "exercises";
   const formatMessage = (message) => {
     message = message.replace(/`</g, "`");
     message = message.replace(/>`/g, "`");
-    message = message.replace(/\n•/g, "\n\n•");
+    message = message.replace(/(?<!\n)\n•/g, "\n\n•");
+    message = message.replace(/(?<=:)\n/g, "\n\n");
+    message = message.replace(/(?<!\n)```/g, "\n```");
+    message = message.replace(/```(?!\n)/g, "```\n");
 
-    return <ReactMarkdown>{message}</ReactMarkdown>;
+    return message;
   };
+
   return (
     <div className="col-12 col-lg-7 col-xl-9">
       <div className="py-2 px-4 border-bottom d-none d-lg-block"></div>
       <div className="position-relative">
         <div className="chat-messages p-4">
           {props.currentChannel
-            ? props.messages[props.currentChannel].map((message) => (
-                <div className="chat-message-left pb-4" key={message.client_msg_id}>
-                  <div>
-                    <img
-                      src={message.user_profile?.image_72?.replace(/\\\//g, "/")}
-                      className="rounded-circle mr-1"
-                      alt="Sharon Lessman"
-                      width="40"
-                      height="40"
-                    />
-                    <div className="text-muted small text-nowrap mt-2">2:34 am</div>
+            ? props.messages[props.currentChannel].map((message) => {
+                return (
+                  <div className="chat-message-left pb-4" key={message.client_msg_id} id={message.client_msg_id}>
+                    <div>
+                      <img
+                        src={message.user_profile?.image_72?.replace(/\\\//g, "/")}
+                        className="rounded-circle ms-1"
+                        alt={message.user_profile?.display_name}
+                        width="40"
+                        height="40"
+                      />
+                      <div className="text-muted small text-nowrap mt-1 me-2">{message.user_profile?.display_name}</div>
+                    </div>
+                    <div className="flex-shrink-1 bg-light rounded py-2 px-3 text-left">
+                      {/* <div className="font-weight-bold mb-1">{message.user_profile?.display_name}</div> */}
+                      <ReactMarkdown>{formatMessage(message.text)}</ReactMarkdown>
+                    </div>
                   </div>
-                  <div className="flex-shrink-1 bg-light rounded py-2 px-3 ml-3 text-left">
-                    <div className="font-weight-bold mb-1">{message.user_profile?.display_name}</div>
-                    {formatMessage(message.text)}
-                  </div>
-                </div>
-              ))
+                );
+              })
             : null}
         </div>
       </div>
