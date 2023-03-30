@@ -14,8 +14,25 @@ function App() {
       console.log(response.data);
       setChannels(response.data.channels);
       setCurrentChannel(response.data.channels[0].name);
-      setMessages(response.data.messages);
+      setMessages(formatUsers(response.data.messages, response.data.users));
     });
+  };
+
+  const formatUsers = (m, users) => {
+    //TODO: Map over key value pairs; messages isn't an array maybe rename?
+    let formatted_m = {};
+    for (const [key, value] of Object.entries(m)) {
+      formatted_m[key] = value.map((message) => {
+        if (!message.user_profile) {
+          const user = users.filter((user) => user.id === message.user)?.[0];
+
+          message.user_profile = user?.profile;
+        }
+        return message;
+      });
+    }
+
+    return formatted_m;
   };
 
   return (
