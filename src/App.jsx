@@ -13,8 +13,8 @@ function App() {
     axios.post("http://localhost:3000/messages.json", params).then((response) => {
       console.log(response.data);
       setChannels(response.data.channels);
+      setCurrentChannel(response.data.channels[5].name);
       setMessages(response.data.messages);
-      setCurrentChannel(response.data.channels[0]);
     });
   };
 
@@ -27,7 +27,7 @@ function App() {
         <div className="card">
           <div className="row g-0">
             <Channels channels={channels} />
-            <Messages messages={[]} />
+            <Messages messages={messages} currentChannel={currentChannel} />
           </div>
         </div>
       </div>
