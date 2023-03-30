@@ -20,8 +20,8 @@ export function Messages(props) {
           {props.currentChannel
             ? props.messages[props.currentChannel].map((message) => {
                 return (
-                  <div className="chat-message-left pb-4" key={message.client_msg_id} id={message.client_msg_id}>
-                    <div>
+                  <div className="chat-message-left pb-4 row" key={message.client_msg_id} id={message.client_msg_id}>
+                    <div className="col-2">
                       <img
                         src={message.user_profile?.image_72?.replace(/\\\//g, "/")}
                         className="rounded-circle ms-1"
@@ -35,7 +35,7 @@ export function Messages(props) {
                           : message.user_profile?.real_name}
                       </div>
                     </div>
-                    <div className="flex-shrink-1 bg-light rounded py-2 px-3 text-left">
+                    <div className="flex-shrink-1 bg-light rounded py-2 px-3 text-left col-10">
                       {/* <div className="font-weight-bold mb-1">{message.user_profile?.display_name}</div> */}
                       <ReactMarkdown>{formatMessage(message.text)}</ReactMarkdown>
                       {message.files
