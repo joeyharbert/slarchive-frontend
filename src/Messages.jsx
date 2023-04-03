@@ -37,7 +37,7 @@ export function Messages(props) {
                       </div>
                     </div>
                     <div className="flex-shrink-1 bg-light rounded py-2 px-3 text-left col-10">
-                      {/* <div className="font-weight-bold mb-1">{message.user_profile?.display_name}</div> */}
+                      <div className="text-muted small mb-1">{message.date}</div>
                       <ReactMarkdown>{formatMessage(message)}</ReactMarkdown>
                       {message.files
                         ? message.files.map((file) => {
