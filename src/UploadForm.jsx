@@ -2,19 +2,31 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 
 export function UploadForm(props) {
-  const [show, setShow] = useState(true);
+  const [modalShow, setModalShow] = useState(true);
+  const [errors, setErrors] = useState([]);
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);
-    props.onUploadFile(params, () => setShow(false));
+    props.onUploadFile(
+      params,
+      () => setModalShow(false),
+      (errors) => setErrors(errors)
+    );
   };
 
   return (
-    <Modal show={show} backdrop="static" keyboard={false}>
+    <Modal show={modalShow} backdrop="static" keyboard={false}>
       <Modal.Header>
         <Modal.Title>Select slack zipfile for upload</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <ul>
+          {errors.map((error) => (
+            <li key={error} className="text-danger">
+              {error}
+            </li>
+          ))}
+        </ul>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="slackFile" className="form-label">

@@ -9,14 +9,21 @@ function App() {
   const [channels, setChannels] = useState([]);
   const [messages, setMessages] = useState({});
   const [currentChannel, setCurrentChannel] = useState(null);
-  const handleRequest = (params, callback) => {
-    axios.post("http://localhost:3000/messages.json", params).then((response) => {
-      console.log(response.data);
-      setChannels(response.data.channels);
-      setCurrentChannel(response.data.channels[0].name);
-      setMessages(formatUsers(response.data.messages, response.data.users));
-      callback();
-    });
+  const handleRequest = (params, callback, errorCallback) => {
+    errorCallback([]);
+    axios
+      .post("http://localhost:3000/messages.json", params)
+      .then((response) => {
+        console.log(response.data);
+        setChannels(response.data.channels);
+        setCurrentChannel(response.data.channels[0].name);
+        setMessages(formatUsers(response.data.messages, response.data.users));
+        callback();
+      })
+      .catch((error) => {
+        console.log(error);
+        errorCallback(error.response.data.errors);
+      });
   };
 
   const formatUsers = (m, users) => {
