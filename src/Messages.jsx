@@ -1,7 +1,8 @@
 import ReactMarkdown from "react-markdown";
 
 export function Messages(props) {
-  const formatMessage = (message) => {
+  const formatMessage = (messageObject) => {
+    let message = messageObject.text;
     message = message.replace(/`</g, "`");
     message = message.replace(/>`/g, "`");
     message = message.replace(/(?<!\n)\n•/g, "\n\n•");
@@ -37,11 +38,11 @@ export function Messages(props) {
                     </div>
                     <div className="flex-shrink-1 bg-light rounded py-2 px-3 text-left col-10">
                       {/* <div className="font-weight-bold mb-1">{message.user_profile?.display_name}</div> */}
-                      <ReactMarkdown>{formatMessage(message.text)}</ReactMarkdown>
+                      <ReactMarkdown>{formatMessage(message)}</ReactMarkdown>
                       {message.files
                         ? message.files.map((file) => {
                             if (file.mimetype?.substr(0, 5) === "image") {
-                              return <img src={file.thumb_360} />;
+                              return <img src={file.thumb_360} key={file.id} />;
                             }
                           })
                         : null}

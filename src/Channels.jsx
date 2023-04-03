@@ -12,15 +12,28 @@ export function Channels(props) {
         </div>
       </div>
       <div className="d-grid gap-1">
-        {props.channels.map((channel) => (
-          <div key={channel.id} className="p-2 mx-auto">
-            <a onClick={() => onClick(channel)} className="list-group-item list-group-item-action border-0">
-              <div className="d-flex">
-                <div className="flex-grow-1 ml-3">#{channel.name}</div>
+        {props.channels.map((channel) => {
+          if (channel.name === props.currentChannel) {
+            return (
+              <div key={channel.id} className="p-2 mx-auto">
+                <a onClick={() => onClick(channel)} className="list-group-item list-group-item-action border-0 fw-bold">
+                  <div className="d-flex">
+                    <div className="flex-grow-1 ml-3">#{channel.name}</div>
+                  </div>
+                </a>
               </div>
-            </a>
-          </div>
-        ))}
+            );
+          }
+          return (
+            <div key={channel.id} className="p-2 mx-auto">
+              <a onClick={() => onClick(channel)} className="list-group-item list-group-item-action border-0">
+                <div className="d-flex">
+                  <div className="flex-grow-1 ml-3">#{channel.name}</div>
+                </div>
+              </a>
+            </div>
+          );
+        })}
       </div>
       <hr className="d-block d-lg-none mt-1 mb-0" />
     </div>

@@ -19,7 +19,6 @@ function App() {
   };
 
   const formatUsers = (m, users) => {
-    //TODO: Map over key value pairs; messages isn't an array maybe rename?
     let formatted_m = {};
     for (const [key, value] of Object.entries(m)) {
       formatted_m[key] = value.map((message) => {
