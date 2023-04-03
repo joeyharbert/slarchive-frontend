@@ -36,10 +36,10 @@ function App() {
   };
 
   return (
-    <main className="content">
+    <main className="content container mt-5">
       <UploadForm onUploadFile={handleRequest} />
       <div className="container p-0">
-        <h1 className="h3 mb-3">Messages</h1>
+        <h1 className="h3 mb-3">slarchive</h1>
 
         <div className="card">
           <div className="row g-0">
