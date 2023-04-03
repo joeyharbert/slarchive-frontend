@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import { toArray } from "react-emoji-render";
 
 export function Messages(props) {
   const formatMessage = (messageObject) => {
@@ -9,8 +10,23 @@ export function Messages(props) {
     message = message.replace(/(?<=:)\n/g, "\n\n");
     message = message.replace(/(?<!\n)```/g, "\n```");
     message = message.replace(/```(?!\n)/g, "```\n");
+    message = parseEmojis(message);
 
     return message;
+  };
+
+  const parseEmojis = (value) => {
+    const emojisArray = toArray(value);
+
+    // toArray outputs React elements for emojis and strings for other
+    const newValue = emojisArray.reduce((previous, current) => {
+      if (typeof current === "string") {
+        return previous + current;
+      }
+      return previous + current.props.children;
+    }, "");
+
+    return newValue;
   };
 
   const isIncludesFilter = (message) => {
