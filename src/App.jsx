@@ -9,6 +9,7 @@ function App() {
   const [channels, setChannels] = useState([]);
   const [messages, setMessages] = useState({});
   const [currentChannel, setCurrentChannel] = useState(null);
+  const [searchFilter, setSearchFilter] = useState("");
   const handleRequest = (params, callback, errorCallback) => {
     errorCallback([]);
     axios
@@ -50,8 +51,14 @@ function App() {
 
         <div className="card">
           <div className="row g-0">
-            <Channels channels={channels} currentChannel={currentChannel} setCurrentChannel={setCurrentChannel} />
-            <Messages messages={messages} currentChannel={currentChannel} />
+            <Channels
+              channels={channels}
+              currentChannel={currentChannel}
+              setCurrentChannel={setCurrentChannel}
+              searchFilter={searchFilter}
+              setSearchFilter={setSearchFilter}
+            />
+            <Messages messages={messages} currentChannel={currentChannel} searchFilter={searchFilter} />
           </div>
         </div>
       </div>
