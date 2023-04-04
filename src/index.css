@@ -46,4 +46,7 @@ body{margin-top:20px;}
 pre {
     background-color: #ffffff;
 }
-
+.logo {
+    width: 40px;
+    margin-bottom: 6px;
+}

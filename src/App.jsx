@@ -4,14 +4,18 @@ import { Messages } from "./Messages";
 import axios from "axios";
 import { UploadForm } from "./UploadForm";
 import { useState } from "react";
+import Spinner from "react-bootstrap/Spinner";
 
 function App() {
   const [channels, setChannels] = useState([]);
   const [messages, setMessages] = useState({});
   const [currentChannel, setCurrentChannel] = useState(null);
   const [searchFilter, setSearchFilter] = useState("");
-  const handleRequest = (params, callback, errorCallback) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const handleRequest = (params, hideModal, errorCallback) => {
     errorCallback([]);
+    setIsLoading(true);
+    hideModal();
     axios
       .post("/messages.json", params)
       .then((response) => {
@@ -19,11 +23,12 @@ function App() {
         setChannels(response.data.channels);
         setCurrentChannel(response.data.channels[0].name);
         setMessages(formatUsers(response.data.messages, response.data.users));
-        callback();
+        setIsLoading(false);
       })
       .catch((error) => {
         // console.log(error);
         errorCallback(error.response.data.errors);
+        setIsLoading(false);
       });
   };
 
@@ -57,12 +62,14 @@ function App() {
   };
 
   return (
-    <main className="content container mt-5">
+    <main className="content container mt-4">
       <UploadForm onUploadFile={handleRequest} />
-      <div className="container p-0">
-        <h1 className="h3 mb-3">slarchive</h1>
+      <div className="container">
+        <h1 className="h3">
+          slarchive <img src="../public/slarchive.png" className="logo" />
+        </h1>
 
-        <div className="card">
+        <div className="card mb-5">
           <div className="row g-0">
             <Channels
               channels={channels}
@@ -71,7 +78,14 @@ function App() {
               searchFilter={searchFilter}
               setSearchFilter={setSearchFilter}
             />
-            <Messages messages={messages} currentChannel={currentChannel} searchFilter={searchFilter} />
+
+            {isLoading ? (
+              <div className="d-flex align-items-center justify-content-center mb-5">
+                <Spinner animation="border" size="lg" variant="primary" />
+              </div>
+            ) : (
+              <Messages messages={messages} currentChannel={currentChannel} searchFilter={searchFilter} />
+            )}
           </div>
         </div>
       </div>
