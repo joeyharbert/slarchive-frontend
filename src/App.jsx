@@ -5,6 +5,7 @@ import axios from "axios";
 import { UploadForm } from "./UploadForm";
 import { useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
+import logo from "./assets/slarchive.png";
 
 function App() {
   const [channels, setChannels] = useState([]);
@@ -66,7 +67,7 @@ function App() {
       <UploadForm onUploadFile={handleRequest} />
       <div className="container">
         <h1 className="h3">
-          slarchive <img src="../public/slarchive.png" className="logo" />
+          slarchive <img src={logo} className="logo" />
         </h1>
 
         <div className="card mb-5">

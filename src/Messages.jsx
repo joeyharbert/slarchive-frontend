@@ -39,7 +39,6 @@ export function Messages(props) {
 
   return (
     <div className="col-12 col-lg-7 col-xl-9">
-      <div className="py-2 px-4 border-bottom d-none d-lg-block"></div>
       <div className="position-relative">
         <div className="chat-messages p-4">
           {props.currentChannel
