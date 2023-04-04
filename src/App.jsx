@@ -13,16 +13,16 @@ function App() {
   const handleRequest = (params, callback, errorCallback) => {
     errorCallback([]);
     axios
-      .post("http://localhost:3000/messages.json", params)
+      .post("/messages.json", params)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setChannels(response.data.channels);
         setCurrentChannel(response.data.channels[0].name);
         setMessages(formatUsers(response.data.messages, response.data.users));
         callback();
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         errorCallback(error.response.data.errors);
       });
   };
@@ -42,7 +42,7 @@ function App() {
           message.text.match(/<@[A-Za-z0-9]*>/).forEach((user) => {
             const userIdd = user.substr(2, 11);
             const userObject = users.filter((user) => user.id === userIdd)?.[0];
-            console.log(userObject.profile);
+            // console.log(userObject.profile);
             const userName = userObject.profile.display_name
               ? userObject.profile.display_name
               : userObject.profile.real_name;
