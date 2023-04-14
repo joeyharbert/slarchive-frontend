@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 export function UploadForm(props) {
   const [modalShow, setModalShow] = useState(true);
   const [errors, setErrors] = useState([]);
-  const [loading, setLoading] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);

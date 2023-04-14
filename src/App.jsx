@@ -20,7 +20,7 @@ function App() {
     axios
       .post("/messages.json", params)
       .then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         setChannels(response.data.channels);
         setCurrentChannel(response.data.channels[0].name);
         setMessages(formatUsers(response.data.messages, response.data.users));
@@ -63,7 +63,7 @@ function App() {
   };
 
   return (
-    <main className="content container mt-4">
+    <main className="content container mt-3">
       <UploadForm onUploadFile={handleRequest} />
       <div className="container">
         <h1 className="h3">
