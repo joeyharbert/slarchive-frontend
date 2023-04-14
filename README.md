@@ -1,4 +1,4 @@
-# [slarchive] (https://slarchive.onrender.com)
+# [slarchive](https://slarchive.onrender.com)
 
 slarchive is a web application for parsing and displaying slack archival json from an exported slack zip file. The frontend takes the response from the backend and uses Bootstrap to display the messages in a user friendly format.
 
@@ -8,7 +8,7 @@ Frontend is built in React through vite, and uses Bootstrap (and React Bootstrap
 
 ## Installation - Frontend Display
 
-** First, make sure you've followed the install instructions for the backend API [here] (https://github.com/joeyharbert/slarchive-api#installation---backend-parsing-api)**
+** First, make sure you've followed the install instructions for the backend API [here](https://github.com/joeyharbert/slarchive-api#installation---backend-parsing-api)**
 
 After cloning the repo and navigating to the project directory, it's a typical npm project install.
 
